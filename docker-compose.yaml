@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  ros-jazzy:
+  ros-iron:
     image: ${IMAGE_NAME}:latest
     privileged: true
     network_mode: host
-    container_name: ubuntu-ros-top-side-container
+    container_name: ros-iron
 
     environment: &env_vars
         - LC_ALL=en_US.utf8

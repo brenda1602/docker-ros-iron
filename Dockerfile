@@ -1,4 +1,4 @@
-FROM osrf/ros:jazzy-desktop-full
+FROM osrf/ros:iron-desktop-full
 
 ARG USERNAME=${USERNAME:-admin}
 
@@ -40,15 +40,16 @@ RUN apt-get update && \
     xvfb \
     doxygen \
     dbus-x11 \
-    ros-jazzy-rqt \
-    ros-jazzy-rqt-common-plugins && \
+    ros-iron-rqt \
+    ros-iron-rqt-common-plugins && \
     pip3 install --break-system-packages dcf-tools && \
     pip3 install --break-system-packages vcstool && \
+    pip3 install --break-system-packages numpy && \
     rm -rf /var/lib/apt/lists/*
 
 # Create catkin workspace
 WORKDIR /home/$USERNAME/
-RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash"
+RUN /bin/bash -c "source /opt/ros/iron/setup.bash"
 
 RUN useradd -m $USERNAME && \
     echo "$USERNAME:$USERNAME" | chpasswd && \

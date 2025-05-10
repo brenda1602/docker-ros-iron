@@ -1,2 +1,2 @@
-# docker_ros_jazzy
-Launch a pre-configured Docker container with ROS Jazzy, ready for development and testing.
+# docker_ros_iron
+Launch a pre-configured Docker container with ROS Iron, ready for development and testing.
