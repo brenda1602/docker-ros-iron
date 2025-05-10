@@ -4,9 +4,11 @@ ARG USERNAME=${USERNAME:-admin}
 
 ENV LANG=en_US.UTF-8 \
     LIBGL_ALWAYS_SOFTWARE="1" \
-    GALLIUM_DRIVER="softpipe"
+    GALLIUM_DRIVER="softpipe" \
+    PATH="/opt/venv/bin:$PATH"
 
-RUN apt update && apt install -y python3-venv
+RUN apt-get update && apt-get install -y python3-venv python3-pip && \
+    python3 -m venv /opt/venv
 
 RUN python3 -m venv /opt/venv
 
@@ -41,6 +43,7 @@ RUN apt-get update && \
     ros-jazzy-rqt \
     ros-jazzy-rqt-common-plugins && \
     pip3 install --break-system-packages dcf-tools && \
+    pip3 install --break-system-packages vcstool && \
     rm -rf /var/lib/apt/lists/*
 
 # Create catkin workspace
@@ -60,7 +63,7 @@ RUN useradd -m $USERNAME && \
     echo Etc/UTC > /etc/timezone
 
 RUN mkdir -p /home/$USERNAME/.ros && \
-chown -R $USERNAME:$USERNAME /home/$USERNAME/.ros
+    chown -R $USERNAME:$USERNAME /home/$USERNAME/.ros
 
 USER $USERNAME
 RUN rosdep update && \
