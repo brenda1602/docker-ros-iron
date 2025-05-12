@@ -1,4 +1,4 @@
-FROM osrf/ros:iron-desktop-full
+FROM osrf/ros:humble-desktop-full
 
 ARG USERNAME=${USERNAME:-admin}
 
@@ -40,16 +40,19 @@ RUN apt-get update && \
     xvfb \
     doxygen \
     dbus-x11 \
-    ros-iron-rqt \
-    ros-iron-rqt-common-plugins && \
-    pip3 install --break-system-packages dcf-tools && \
-    pip3 install --break-system-packages vcstool && \
-    pip3 install --break-system-packages numpy && \
+    ros-humble-rqt \
+    ros-humble-rqt-common-plugins && \
+    pip3 install dcf-tools && \
+    pip3 install vcstool && \
+    pip3 install numpy && \
+    pip3 uninstall em empy -y && \
+    pip3 install empy==3.3.4 && \
+    pip3 install catkin_pkg && \
     rm -rf /var/lib/apt/lists/*
 
 # Create catkin workspace
 WORKDIR /home/$USERNAME/
-RUN /bin/bash -c "source /opt/ros/iron/setup.bash"
+RUN /bin/bash -c "source /opt/ros/humble/setup.bash"
 
 RUN useradd -m $USERNAME && \
     echo "$USERNAME:$USERNAME" | chpasswd && \
@@ -82,8 +85,7 @@ RUN mkdir -p /etc/bash_completion.d && \
     -o /etc/bash_completion.d/docker
 
 # Set bash as the default shell and source completion in .bashrc
-RUN echo "source /etc/bash_completion" >> /root/.bashrc && \
-    echo "source /etc/bash_compleGtion.d/docker" >> /root/.bashrc
+RUN echo "source /etc/bash_completion" >> /root/.bashrc
 
 RUN echo "source /etc/bash_completion" >> /home/$USERNAME/.bashrc && \
     echo "source /etc/bash_completion.d/docker" >> /home/$USERNAME/.bashrc && \

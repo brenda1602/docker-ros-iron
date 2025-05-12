@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  ros-iron:
+  ros-humble:
     image: ${IMAGE_NAME}:latest
     privileged: true
     network_mode: host
-    container_name: ros-iron
+    container_name: ros-humble
 
-    environment: &env_vars
+    envhumblement: &env_vars
         - LC_ALL=en_US.utf8
         - TERM
         - DEBUG=${DEBUG}

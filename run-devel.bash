@@ -3,10 +3,10 @@
 set -e
 
 # Set variables
-IMAGE_NAME="ubuntu-jammy-ros-iron"
+IMAGE_NAME="ubuntu-jammy-ros-humble"
 IMAGE_TAG="latest"
-CONTAINER_NAME="ros-iron"
-ROS_DISTRO="iron"
+CONTAINER_NAME="ros-humble"
+ROS_DISTRO="humble"
 ROS_VERSION=2
 ROS_PYTHON_VERSION=3
 ROS_DOMAIN_ID=42
